@@ -1,10 +1,12 @@
 import Excel, { Column } from 'exceljs';
 import * as path from 'path';
 import { generateData, getColumns } from './data-generator';
+import { RawRowModel } from './models/raw-row.model';
+import { printProgress } from './utils';
 
 const rowCount = process.argv[2] ? parseInt(process.argv[2]) : 10000;
 
-console.log(`Generating ${rowCount} rows of data...`);
+printProgress(`Generating ${rowCount} rows of data...`);
 
 const workbook = new Excel.Workbook();
 const worksheet = workbook.addWorksheet('Card Data');
@@ -12,16 +14,31 @@ const excelColumns: Partial<Column>[] = getColumns();
 
 worksheet.columns = excelColumns;
 
-const data = generateData(rowCount);
+// Build the data in chunks to avoid memory issues
+const data = [];
+const chunkSize = 100000;
+const chunkCount = Math.ceil(rowCount / chunkSize);
 
-data.forEach(row => {
-    worksheet.addRow(row);
+for (let i = 0; i < chunkCount; i++) {
+    printProgress("Generating chunk " + (i + 1) + " of " + chunkCount);
+    const chunk = generateData(chunkSize);
+    data.push(chunk);
+    printProgress("Finished chunk " + (i + 1) + " of " + chunkCount);
+}
+
+data.forEach((chunk: RawRowModel[], index: number) => {
+    printProgress("Writing chunk " + (index + 1) + " of " + chunkCount);
+    worksheet.addRows(chunk);
+    printProgress("Finished writing chunk " + (index + 1) + " of " + chunkCount);
 });
 
-const exportPath = path.resolve(__dirname, `outputs/output_${rowCount}_rows_${new Date().toISOString()}.xlsx`);
+const exportPath = path.resolve(__dirname, `outputs/output_${rowCount}_rows_${new Date().toISOString()}.csv`);
 
-workbook.xlsx.writeFile(exportPath).then(() => {
-    console.log('Finished.');
+printProgress(`Writing to ${exportPath}...`);
+workbook.csv.writeFile(exportPath).then(() => {
 }).catch((err) => {
+    console.error('Error writing file.');
     console.error(err);
+}).finally(() => {
+    printProgress('Finished.', true);
 });

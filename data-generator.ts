@@ -1,63 +1,47 @@
 import { Column } from 'exceljs';
-import { getFormat, getColumnTitle, ColumnTitles, ColumnFormat } from './file-format';
+import { getFormat, getColumnTitle, ColumnFormat } from './file-format';
 import { RawRowModel } from './models/raw-row.model';
 
-function getColumns(): Partial<Column>[] {
-    return getFormat().map(format => {
+function getColumns(type: string): Partial<Column>[] {
+    return getFormat(type).map(format => {
         return { key: format.key, header: getColumnTitle(format.title) }; 
     });
 }
 
-function generateData(rowCount: number = 10000): RawRowModel[] {
-    const data: RawRowModel[] = [...Array<RawRowModel>(rowCount)];
+function generateData<T>(type: string, rowCount: number): T[] {
+    const data: T[] = [...Array<T>(rowCount)];
 
-    const format = getFormat();
+    const format = getFormat(type);
 
     data.forEach((row, index) => {
-        data[index] = generateRowData(row, format);
+        (data as { [key: string]: any })[index] = generateRowData(RawRowModel, format);
     });
     
     return data;
 }
 
-function generateRowData(data: RawRowModel, format: ColumnFormat[]): RawRowModel {
-    data = new RawRowModel();
+function generateRowData<T>(type: (new () => T), format: ColumnFormat[]): T {
+    const data: T = new type();
 
-    format.forEach((column) => {
-        switch (column.title) {
-            case ColumnTitles.Forename:
-                data.forename = 'Forename';
-                break;
-            case ColumnTitles.Surname:
-                data.surname = 'Surname';
-                break;
-            case ColumnTitles.AccountNumber:
-                data.accountNumber = getRandomDigits(column.maxLength, column.protect);
-                break;
-            case ColumnTitles.Balance:
-                data.balance = getRandomNumber(column.maxLength, column.minLength, column.protect);
-                break;
-            case ColumnTitles.CardNumber:
-                data.cardNumber = getRandomDigits(column.maxLength, column.protect);
-                break;
-            case ColumnTitles.CardType:
-                data.cardType = column.options ? column.options[Number(getRandomNumber(column.options.length))] : '';
-                break;
-            case ColumnTitles.CVV:
-                data.cvv = getRandomDigits(column.maxLength, column.protect);
-                break;
-            case ColumnTitles.Expires:
-                data.expires = getRandomDate();
-                break;
-            case ColumnTitles.HasChip:
-                data.hasChip = getRandomNumber(1) ? 'Yes' : 'No';
-                break;
-            case ColumnTitles.Pan:
-                data.pan = getRandomDigits(column.maxLength, column.protect);
-                break;
-            case ColumnTitles.SortCode:
-                data.sortCode = getRandomDigits(column.maxLength, column.protect);
-                break;
+    format.forEach((column) => {        
+        if (column.defaultValue) {
+            (data as { [key: string]: any })[column.key] = column.defaultValue;
+        }
+
+        if (column.options) {
+            (data as { [key: string]: any })[column.key] = column.options[Number(getRandomNumber(column.options.length))];
+        }
+        
+        if (column.type === 'Date') {
+            (data as { [key: string]: any })[column.key] = getRandomDate();
+        }
+
+        if (column.type === 'number') {
+            if (column.padZerosLeft) {
+                (data as { [key: string]: any })[column.key] = getRandomDigits(column.maxLength, column.protect);
+            } else {
+                (data as { [key: string]: any })[column.key] = getRandomNumber(column.maxLength, column.minLength, column.protect);
+            }
         }
     });
 

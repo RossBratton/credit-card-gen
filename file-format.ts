@@ -2,9 +2,11 @@ interface ColumnFormat {
     title: ColumnTitles;
     key: string;
     type: string;
+    defaultValue?: string;
     protect?: boolean;
     minLength?: number;
     maxLength?: number;
+    padZerosLeft?: boolean;
     options?: string[];
 } 
 
@@ -22,84 +24,97 @@ enum ColumnTitles {
     Balance
 };
 
-const columns: ColumnFormat[] = [
+const cardColumns: ColumnFormat[] = [
     {
         title: ColumnTitles.Forename,
-        key: "forename",
-        type: 'string'
+        key: 'forename',
+        type: 'string',
+        defaultValue: 'Forename'
     },
     {
         title: ColumnTitles.Surname,
-        key: "surname",
-        type: 'string'
+        key: 'surname',
+        type: 'string',
+        defaultValue: 'Surname'
     },
     {
         title: ColumnTitles.CardNumber,
-        key: "cardNumber",
+        key: 'cardNumber',
         type: 'number',
         minLength: 16,
         maxLength: 16,
+        padZerosLeft: true,
         protect: true
     },
     {
         title: ColumnTitles.CardType,
-        key: "cardType",
+        key: 'cardType',
         type: 'string',
         options: ['Credit', 'Debit', 'Debit (Prepaid)']
     },
     {
         title: ColumnTitles.Expires,
-        key: "expires",
+        key: 'expires',
         type: 'Date'
     },
     {
         title: ColumnTitles.CVV,
-        key: "cvv",
+        key: 'cvv',
         type: 'number',
         minLength: 3,
         maxLength: 3,
+        padZerosLeft: true,
         protect: true
     },
     {
         title: ColumnTitles.Pan,
-        key: "pan",
+        key: 'pan',
         type: 'number',
         minLength: 4,
         maxLength: 4,
+        padZerosLeft: true,
         protect: true
     },
     {
         title: ColumnTitles.SortCode,
-        key: "sortCode",
+        key: 'sortCode',
         type: 'number',
         minLength: 6,
         maxLength: 6,
+        padZerosLeft: true,
         protect: true
     },
     {
         title: ColumnTitles.AccountNumber,
-        key: "accountNumber",
+        key: 'accountNumber',
         type: 'number',
         minLength: 8,
         maxLength: 8,
+        padZerosLeft: true,
         protect: true
     },
     {
         title: ColumnTitles.HasChip,
-        key: "hasChip",
-        type: 'boolean'
+        key: 'hasChip',
+        type: 'string',
+        options: ['Yes', 'No']
     },
     {
         title: ColumnTitles.Balance,
-        key: "balance",
+        key: 'balance',
         type: 'number',
         minLength: 1,
-        maxLength: 1000000
+        maxLength: 1000000,
+        padZerosLeft: false
     }
 ]
 
-function getFormat() {
-    return columns
+function getFormat(type: string) {
+    if (type === 'card') {
+        return cardColumns
+    }
+
+    return [];
 }
 
 function getColumnTitle(columnTitle: ColumnTitles) {

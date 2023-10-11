@@ -3,8 +3,15 @@ import * as path from 'path';
 import { generateData, getColumns } from './data-generator';
 import { printProgress } from './utils';
 
+const fileTypes = ['card', 'customer'];
+
 const rowCount = process.argv[2] ? parseInt(process.argv[2]) : 10000;
-const fileType = process.argv[3] ? process.argv[3] : 'card';
+const fileType = process.argv[3];
+
+if (fileTypes.indexOf(fileType) === -1) {
+    printProgress(`Invalid file type. Must be one of ${fileTypes.join(', ')}.`);
+    process.exit(1);
+}
 
 printProgress(`Generating ${rowCount} rows of data...`);
 

@@ -4,12 +4,13 @@ import { generateData, getColumns } from './data-generator';
 import { printProgress } from './utils';
 
 const rowCount = process.argv[2] ? parseInt(process.argv[2]) : 10000;
+const fileType = process.argv[3] ? process.argv[3] : 'card';
 
 printProgress(`Generating ${rowCount} rows of data...`);
 
 const workbook = new Excel.Workbook();
-const worksheet = workbook.addWorksheet('Card Data');
-const excelColumns: Partial<Column>[] = getColumns('card');
+const worksheet = workbook.addWorksheet(`${fileType} Data`);
+const excelColumns: Partial<Column>[] = getColumns(fileType);
 
 worksheet.columns = excelColumns;
 
@@ -20,7 +21,7 @@ const chunkCount = Math.ceil(rowCount / chunkSize);
 
 for (let i = 0; i < chunkCount; i++) {
     printProgress("Generating chunk " + (i + 1) + " of " + chunkCount);
-    const chunk = generateData('card', chunkSize);
+    const chunk = generateData(fileType, chunkSize);
     data.push(chunk);
     printProgress("Finished chunk " + (i + 1) + " of " + chunkCount);
 }
@@ -31,10 +32,10 @@ data.forEach((chunk: any[], index: number) => {
     printProgress("Finished writing chunk " + (index + 1) + " of " + chunkCount);
 });
 
-const exportPath = path.resolve(__dirname, `outputs/output_${rowCount}_rows_${new Date().toISOString()}.csv`);
+const exportPath = path.resolve(__dirname, `outputs/${fileType}_${rowCount}_rows_${new Date().toISOString()}.csv`);
 
 printProgress(`Writing to ${exportPath}...`);
-workbook.csv.writeFile(exportPath).then(() => {
+    workbook.csv.writeFile(exportPath).then(() => {
 }).catch((err) => {
     console.error('Error writing file.');
     console.error(err);

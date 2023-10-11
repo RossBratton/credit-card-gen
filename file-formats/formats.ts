@@ -1,3 +1,4 @@
+import CustomerColumns from "./customer-columns";
 import CardColumns from "./card-columns";
 
 interface ColumnFormat {
@@ -8,17 +9,18 @@ interface ColumnFormat {
     protect?: boolean;
     minLength?: number;
     maxLength?: number;
-    padZerosLeft?: boolean;
     options?: string[];
 }
 
 
 function getFormat(type: string) {
-    if (type === 'card') {
+    if (type === 'customer') {
+        return CustomerColumns;
+    } else if (type === 'card') {
+        return CardColumns;
+    } else {
         return CardColumns;
     }
-
-    return [];
 }
 
 export { getFormat, ColumnFormat}

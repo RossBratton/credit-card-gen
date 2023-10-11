@@ -1,6 +1,5 @@
 import { Column } from 'exceljs';
 import { getFormat, ColumnFormat } from './file-formats/formats';
-import { RawRowModel } from './models/raw-row.model';
 
 function getColumns(type: string): Partial<Column>[] {
     return getFormat(type).map(format => {
@@ -14,14 +13,14 @@ function generateData<T>(type: string, rowCount: number): T[] {
     const format = getFormat(type);
 
     data.forEach((row, index) => {
-        (data as { [key: string]: any })[index] = generateRowData(RawRowModel, format);
+        (data as { [key: string]: any })[index] = generateRowData(format);
     });
     
     return data;
 }
 
-function generateRowData<T>(type: (new () => T), format: ColumnFormat[]): T {
-    const data: T = new type();
+function generateRowData<T>(format: ColumnFormat[]): T {
+    const data: any = {};
 
     format.forEach((column) => {        
         if (column.defaultValue) {
@@ -37,7 +36,7 @@ function generateRowData<T>(type: (new () => T), format: ColumnFormat[]): T {
         }
 
         if (column.type === 'number') {
-            if (column.padZerosLeft) {
+            if (column.maxLength && !column.minLength) {
                 (data as { [key: string]: any })[column.key] = getRandomDigits(column.maxLength, column.protect);
             } else {
                 (data as { [key: string]: any })[column.key] = getRandomNumber(column.maxLength, column.minLength, column.protect);

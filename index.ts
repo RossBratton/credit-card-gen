@@ -1,4 +1,5 @@
 import Excel, { Column } from 'exceljs';
+import * as fs from 'fs';
 import * as path from 'path';
 import { generateData, getColumns } from './data-generator';
 import { printProgress } from './utils';
@@ -39,7 +40,13 @@ data.forEach((chunk: any[], index: number) => {
     printProgress("Finished writing chunk " + (index + 1) + " of " + chunkCount);
 });
 
-const exportPath = path.resolve(__dirname, `outputs/${fileType}_${rowCount}_rows_${new Date().toISOString()}.csv`);
+const fileDirectory = path.resolve(__dirname, `outputs/${fileType}`);
+
+if (!fs.existsSync(fileDirectory)){
+    fs.mkdirSync(fileDirectory);
+}
+
+const exportPath = `${fileDirectory}/${fileType}_${rowCount}_rows_${new Date().toISOString()}.csv`;
 
 printProgress(`Writing to ${exportPath}...`);
     workbook.csv.writeFile(exportPath).then(() => {

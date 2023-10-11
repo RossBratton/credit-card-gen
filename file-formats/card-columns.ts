@@ -1,44 +1,20 @@
-interface ColumnFormat {
-    title: ColumnTitles;
-    key: string;
-    type: string;
-    defaultValue?: string;
-    protect?: boolean;
-    minLength?: number;
-    maxLength?: number;
-    padZerosLeft?: boolean;
-    options?: string[];
-} 
+import { ColumnFormat } from "./formats";
 
-enum ColumnTitles {
-    Forename,
-    Surname,
-    CardNumber,
-    CardType,
-    Expires,
-    CVV,
-    Pan,
-    SortCode,
-    AccountNumber,
-    HasChip,
-    Balance
-};
-
-const cardColumns: ColumnFormat[] = [
+const columns: ColumnFormat[] = [
     {
-        title: ColumnTitles.Forename,
+        title: 'Forename',
         key: 'forename',
         type: 'string',
         defaultValue: 'Forename'
     },
     {
-        title: ColumnTitles.Surname,
+        title: 'Surname',
         key: 'surname',
         type: 'string',
         defaultValue: 'Surname'
     },
     {
-        title: ColumnTitles.CardNumber,
+        title: 'CardNumber',
         key: 'cardNumber',
         type: 'number',
         minLength: 16,
@@ -47,18 +23,18 @@ const cardColumns: ColumnFormat[] = [
         protect: true
     },
     {
-        title: ColumnTitles.CardType,
+        title: 'CardType',
         key: 'cardType',
         type: 'string',
         options: ['Credit', 'Debit', 'Debit (Prepaid)']
     },
     {
-        title: ColumnTitles.Expires,
+        title: 'Expires',
         key: 'expires',
         type: 'Date'
     },
     {
-        title: ColumnTitles.CVV,
+        title: 'CVV',
         key: 'cvv',
         type: 'number',
         minLength: 3,
@@ -67,7 +43,7 @@ const cardColumns: ColumnFormat[] = [
         protect: true
     },
     {
-        title: ColumnTitles.Pan,
+        title: 'Pan',
         key: 'pan',
         type: 'number',
         minLength: 4,
@@ -76,7 +52,7 @@ const cardColumns: ColumnFormat[] = [
         protect: true
     },
     {
-        title: ColumnTitles.SortCode,
+        title: 'SortCode',
         key: 'sortCode',
         type: 'number',
         minLength: 6,
@@ -85,7 +61,7 @@ const cardColumns: ColumnFormat[] = [
         protect: true
     },
     {
-        title: ColumnTitles.AccountNumber,
+        title: 'AccountNumber',
         key: 'accountNumber',
         type: 'number',
         minLength: 8,
@@ -94,31 +70,19 @@ const cardColumns: ColumnFormat[] = [
         protect: true
     },
     {
-        title: ColumnTitles.HasChip,
+        title: 'HasChip',
         key: 'hasChip',
         type: 'string',
         options: ['Yes', 'No']
     },
     {
-        title: ColumnTitles.Balance,
+        title: 'Balance',
         key: 'balance',
         type: 'number',
         minLength: 1,
         maxLength: 1000000,
         padZerosLeft: false
     }
-]
+];
 
-function getFormat(type: string) {
-    if (type === 'card') {
-        return cardColumns
-    }
-
-    return [];
-}
-
-function getColumnTitle(columnTitle: ColumnTitles) {
-    return ColumnTitles[columnTitle];
-}
-
-export { getFormat, getColumnTitle, ColumnTitles, ColumnFormat}
+export default columns;

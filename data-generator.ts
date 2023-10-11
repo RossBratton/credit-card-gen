@@ -1,10 +1,10 @@
 import { Column } from 'exceljs';
-import { getFormat, getColumnTitle, ColumnFormat } from './file-format';
+import { getFormat, ColumnFormat } from './file-formats/formats';
 import { RawRowModel } from './models/raw-row.model';
 
 function getColumns(type: string): Partial<Column>[] {
     return getFormat(type).map(format => {
-        return { key: format.key, header: getColumnTitle(format.title) }; 
+        return { key: format.key, header: format.title }; 
     });
 }
 

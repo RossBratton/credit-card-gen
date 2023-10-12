@@ -1,4 +1,4 @@
-import CustomerColumns from "./customer-columns";
+import CustomerColumns from "./member-columns";
 import CardColumns from "./card-columns";
 
 interface ColumnFormat {
@@ -12,9 +12,8 @@ interface ColumnFormat {
     options?: string[];
 }
 
-
 function getFormat(type: string) {
-    if (type === 'customer') {
+    if (type === 'member') {
         return CustomerColumns;
     } else if (type === 'card') {
         return CardColumns;

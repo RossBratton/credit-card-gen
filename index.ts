@@ -4,13 +4,13 @@ import * as path from 'path';
 import { generateData, getColumns } from './data-generator';
 import { printProgress } from './utils';
 
-const fileTypes = ['card', 'customer'];
+const fileTypes = ['card', 'member'];
 
-const rowCount = process.argv[2] ? parseInt(process.argv[2]) : 10000;
-const fileType = process.argv[3];
+const fileType = process.argv[2];
+const rowCount = process.argv[3] ? parseInt(process.argv[3]) : 10000;
 
 if (fileTypes.indexOf(fileType) === -1) {
-    printProgress(`Invalid file type. Must be one of ${fileTypes.join(', ')}.`);
+    printProgress(`Invalid file type ${fileType}. Must be one of ${fileTypes.join(', ')}.`);
     process.exit(1);
 }
 
@@ -24,7 +24,7 @@ worksheet.columns = excelColumns;
 
 // Build the data in chunks to avoid memory issues
 const data = [];
-const chunkSize = 10000;
+const chunkSize = (rowCount < 10000) ? rowCount : 10000;
 const chunkCount = Math.ceil(rowCount / chunkSize);
 
 for (let i = 0; i < chunkCount; i++) {

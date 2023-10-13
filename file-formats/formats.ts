@@ -1,4 +1,4 @@
-import CustomerColumns from "./member-columns";
+import CustomerColumns from "./customer-columns";
 import CardColumns from "./card-columns";
 import TransactionColumns from "./transaction-columns";
 
@@ -14,7 +14,7 @@ interface ColumnFormat {
 }
 
 function getFormat(type: string) {
-    if (type === 'member') {
+    if (type === 'customer') {
         return CustomerColumns;
     } else if (type === 'card') {
         return CardColumns;

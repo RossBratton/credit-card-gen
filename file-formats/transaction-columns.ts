@@ -5,155 +5,156 @@ import { ColumnFormat } from "./formats";
 const columns: ColumnFormat[] = [
     {
         title: 'RowNum',
-        key: 'rownum',
-        type: 'string',
-        defaultValue: 'guid'
+        key: 'RowNum',
+        type: 'number',
+        minLength: 1,
+        maxLength: 1000000
     },
     {
         title: 'BankId',
-        key: 'bankid',
+        key: 'BankId',
         type: 'string',
         options: ['0278', '0904', '0905', '0365', '0903', '0906', '0907']
     },
     {
         title: 'PrivatePan',
-        key: 'privatepan',
+        key: 'PrivatePan',
         type: 'string',
         maxLength: 16,
         protect: true
     },
     {
         title: 'ClearStatus',
-        key: 'clearstatus',
+        key: 'ClearStatus',
         type: 'string',
         defaultValue: 'ClearStatus Value'
     },
     {
         title: 'MTI',
-        key: 'mti',
+        key: 'MTI',
         type: 'string',
         defaultValue: 'MTI Value'
     },
     {
         title: 'FunctionCode',
-        key: 'functioncode',
+        key: 'FunctionCode',
         type: 'string',
         defaultValue: 'FunctionCode Value'
     },
     {
         title: 'ReversalLnd',
-        key: 'reversallnd',
+        key: 'ReversalLnd',
         type: 'string',
         defaultValue: 'ReversalLnd Value'
     },
     {
         title: 'ProcessCode',
-        key: 'processcode',
+        key: 'ProcessCode',
         type: 'string',
         defaultValue: 'ProcessCode Value'
     },
     {
         title: 'OriginatorID',
-        key: 'originatorid',
+        key: 'OriginatorID',
         type: 'string',
         defaultValue: 'guid'
     },
     {
         title: 'MerchantID',
-        key: 'merchantid',
+        key: 'MerchantID',
         type: 'string',
         defaultValue: 'guid'
     },
     {
         title: 'TerminalID',
-        key: 'terminalid',
+        key: 'TerminalID',
         type: 'string',
         defaultValue: 'guid'
     },
     {
         title: 'LocationName',
-        key: 'locationname',
+        key: 'LocationName',
         type: 'string',
         defaultValue: 'Location name'
     },
     {
         title: 'LocationAddress',
-        key: 'locationaddress',
+        key: 'LocationAddress',
         type: 'string',
         defaultValue: 'Location address'
     },
     {
         title: 'LocationCountry',
-        key: 'locationcountry',
+        key: 'LocationCountry',
         type: 'string',
         defaultValue: 'Location country'
     },
     {
         title: 'MCC',
-        key: 'mcc',
+        key: 'MCC',
         type: 'string',
         defaultValue: 'MCC Value'
     },
     {
         title: 'CardholderPresentData',
-        key: 'cardholderpresentdata',
+        key: 'CardholderPresentData',
         type: 'string',
         defaultValue: 'CardholderPresentData Value'
     },
     {
         title: 'TranDate',
-        key: 'trandate',
+        key: 'TranDate',
         type: 'Date'
     },
     {
         title: 'TranCurrencyCode',
-        key: 'trancurrencycode',
+        key: 'TranCurrencyCode',
         type: 'string',
         defaultValue: 'TranCurrencyCode Value'
     },
     {
         title: 'TranCurrencyAmt',
-        key: 'trancurrencyamt',
+        key: 'TranCurrencyAmt',
         type: 'string',
         minLength: 1,
         maxLength: 10000
     },
     {
         title: 'RecnCurrencyCode',
-        key: 'recncurrencycode',
+        key: 'RecnCurrencyCode',
         type: 'string',
         defaultValue: 'RecnCurrencyCode Value'
     },
     {
         title: 'RecnCurrencyAmt',
-        key: 'recncurrencyamt',
+        key: 'RecnCurrencyAmt',
         type: 'string',
         minLength: 1,
         maxLength: 10000
     },
     {
         title: 'PWCBAmt',
-        key: 'pwcbamt',
+        key: 'PWCBAmt',
         type: 'string',
         minLength: 1,
         maxLength: 10000
     },
     {
         title: 'PostFPInd',
-        key: 'postfpind',
+        key: 'PostFPInd',
         type: 'string',
         defaultValue: 'PostFPInd Value'
     },
     {
         title: 'Amount',
-        key: 'amount',
+        key: 'Amount',
         type: 'string',
         minLength: 1,
         maxLength: 10000
     },
     {
         title: 'CardInputMode',
-        key: 'cardinputmode',
+        key: 'CardInputMode',
         type: 'string',
         defaultValue: 'CardInputMode Value'
     }

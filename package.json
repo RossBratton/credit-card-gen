@@ -10,10 +10,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/uuid": "^9.0.5",
     "typescript": "^5.2.2"
   },
   "dependencies": {
     "exceljs": "^4.3.0",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "uuid": "^9.0.1"
   }
 }

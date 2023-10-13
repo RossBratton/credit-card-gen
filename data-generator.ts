@@ -1,4 +1,5 @@
 import { Column } from 'exceljs';
+import { v4 as uuidv4 } from 'uuid';
 import { getFormat, ColumnFormat } from './file-formats/formats';
 
 function getColumns(type: string): Partial<Column>[] {
@@ -24,7 +25,11 @@ function generateRowData<T>(format: ColumnFormat[]): T {
 
     format.forEach((column) => {        
         if (column.defaultValue) {
-            (data as { [key: string]: any })[column.key] = column.defaultValue;
+            if (column.defaultValue === 'guid') {
+                (data as { [key: string]: any })[column.key] = uuidv4();
+            } else {
+                (data as { [key: string]: any })[column.key] = column.defaultValue;
+            }
         }
 
         if (column.options) {

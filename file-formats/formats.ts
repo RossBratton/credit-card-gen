@@ -2,6 +2,8 @@ import CustomerColumns from "./customer-columns";
 import CardColumns from "./card-columns";
 import TransactionColumns from "./transaction-columns";
 import MaintenanceColumns from "./maintenance-columns";
+import EligibilityColumns from "./eligibility-columns";
+import DirectDebitColumns from "./directdebit-columns";
 
 interface ColumnFormat {
     title: string;
@@ -24,7 +26,9 @@ function getFormat(type: string) {
     } else if (type === 'maintenance') {
         return MaintenanceColumns;
     } else if (type === 'eligibility') {
-        return MaintenanceColumns;
+        return EligibilityColumns;
+    } else if (type === 'directdebit') {
+        return DirectDebitColumns;
     } else {
         return CardColumns;
     }

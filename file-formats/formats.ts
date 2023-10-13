@@ -1,6 +1,7 @@
 import CustomerColumns from "./customer-columns";
 import CardColumns from "./card-columns";
 import TransactionColumns from "./transaction-columns";
+import MaintenanceColumns from "./maintenance-columns";
 
 interface ColumnFormat {
     title: string;
@@ -20,6 +21,8 @@ function getFormat(type: string) {
         return CardColumns;
     } else if (type === 'transaction') {
         return TransactionColumns;
+    } else if (type === 'maintenance') {
+        return MaintenanceColumns;
     } else {
         return CardColumns;
     }

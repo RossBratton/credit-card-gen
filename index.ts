@@ -4,7 +4,7 @@ import * as path from 'path';
 import { generateData, getColumns } from './data-generator';
 import { printProgress } from './utils';
 
-const fileTypes = ['card', 'customer', 'transaction', 'maintenance'];
+const fileTypes = ['card', 'customer', 'transaction', 'maintenance', 'eligibility'];
 
 const fileType = process.argv[2];
 const rowCount = process.argv[3] ? parseInt(process.argv[3]) : 10000;

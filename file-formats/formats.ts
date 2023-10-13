@@ -23,6 +23,8 @@ function getFormat(type: string) {
         return TransactionColumns;
     } else if (type === 'maintenance') {
         return MaintenanceColumns;
+    } else if (type === 'eligibility') {
+        return MaintenanceColumns;
     } else {
         return CardColumns;
     }

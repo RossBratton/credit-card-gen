@@ -1,227 +1,161 @@
+// https://rewardinsight.atlassian.net/wiki/spaces/RBS/pages/2915532801/Process+Transaction
+
 import { ColumnFormat } from "./formats";
 
 const columns: ColumnFormat[] = [
     {
-        title: 'Description',
-        key: 'description',
+        title: 'RowNum',
+        key: 'rownum',
         type: 'string',
-        defaultValue: 'This is the description'
+        defaultValue: 'guid'
     },
     {
-        title: 'TransactionId',
-        key: 'transactionid',
-        type: 'number',
-        minLength: 1,
-        maxLength: 1000000
-    },
-    {
-        title: 'TransactionExternalId',
-        key: 'transactionexternalid',
-        type: 'number',
-        minLength: 1,
-        maxLength: 1000000
-    },
-    {
-        title: 'TypeId',
-        key: 'transactiontypeid',
-        type: 'number',
-        minLength: 1,
-        maxLength: 1000000
-    },
-    {
-        title: 'ProcessDate',
-        key: 'matcheddate',
-        type: 'Date'
-    },
-    {
-        title: 'Date',
-        key: 'transactiondate',
-        type: 'Date'
-    },
-    {
-        title: 'ActivationDaysDate',
-        key: 'transactionclearingdate',
-        type: 'Date'
-    },
-    {
-        title: 'MemberUID',
-        key: 'customerid',
+        title: 'BankId',
+        key: 'bankid',
         type: 'string',
-        defaultValue: '0a229cc8-403b-4261-b75e-fd8a29705022'
+        options: ['0278', '0904', '0905', '0365', '0903', '0906', '0907']
     },
     {
-        title: 'NomineeCustomerId',
-        key: 'nomineecustomerid',
+        title: 'PrivatePan',
+        key: 'privatepan',
         type: 'string',
-        defaultValue: 'c88858f4-9fd8-4eaf-9d46-1ed3cc615fad'
-    },
-    {
-        title: 'Id',
-        key: 'cardid',
-        type: 'number',
-        minLength: 1,
-        maxLength: 1000000
-    },
-    {
-        title: 'PartialPan',
-        key: 'panlastfour',
-        type: 'number',
-        maxLength: 4,
+        maxLength: 16,
         protect: true
     },
     {
-        title: 'MerchantId',
+        title: 'ClearStatus',
+        key: 'clearstatus',
+        type: 'string',
+        defaultValue: 'ClearStatus Value'
+    },
+    {
+        title: 'MTI',
+        key: 'mti',
+        type: 'string',
+        defaultValue: 'MTI Value'
+    },
+    {
+        title: 'FunctionCode',
+        key: 'functioncode',
+        type: 'string',
+        defaultValue: 'FunctionCode Value'
+    },
+    {
+        title: 'ReversalLnd',
+        key: 'reversallnd',
+        type: 'string',
+        defaultValue: 'ReversalLnd Value'
+    },
+    {
+        title: 'ProcessCode',
+        key: 'processcode',
+        type: 'string',
+        defaultValue: 'ProcessCode Value'
+    },
+    {
+        title: 'OriginatorID',
+        key: 'originatorid',
+        type: 'string',
+        defaultValue: 'guid'
+    },
+    {
+        title: 'MerchantID',
         key: 'merchantid',
-        type: 'number',
-        minLength: 1,
-        maxLength: 1000000
-    },
-    {
-        title: 'ExternalPartnerId',
-        key: 'partnerid',
-        type: 'number',
-        minLength: 1,
-        maxLength: 1000000
-    },
-    {
-        title: 'HydraOfferId',
-        key: 'offerid',
         type: 'string',
-        defaultValue: 'b7abb2a9-637b-46eb-8c39-e84881e7d17a'
+        defaultValue: 'guid'
     },
     {
-        title: 'CurrencyCode',
-        key: 'currencycode',
+        title: 'TerminalID',
+        key: 'terminalid',
         type: 'string',
-        defaultValue: 'GBP'
+        defaultValue: 'guid'
     },
     {
-        title: 'AffliateCommissionAmount',
-        key: 'netamount',
-        type: 'number',
-        minLength: 1,
-        maxLength: 100000
-    },
-    {
-        title: 'VatAmount',
-        key: 'vatamount',
-        type: 'number',
-        minLength: 1,
-        maxLength: 100000
-    },
-    {
-        title: 'VatAmount',
-        key: 'vatamount',
-        type: 'number',
-        minLength: 1,
-        maxLength: 100000
-    },
-    {
-        title: 'PartnerCommissionAmount',
-        key: 'grossamount',
-        type: 'number',
-        minLength: 1,
-        maxLength: 100000
-    },
-    {
-        title: 'VatRate',
-        key: 'vatrate',
-        type: 'number',
-        minLength: 1,
-        maxLength: 20
-    },
-    {
-        title: 'Amount',
-        key: 'transactionamount',
-        type: 'number',
-        minLength: 1,
-        maxLength: 1000000
-    },
-    {
-        title: 'ClubCash',
-        key: 'paymentamount',
-        type: 'number',
-        minLength: 1,
-        maxLength: 1000000
-    },
-    {
-        title: 'MarketingRate',
-        key: 'marketingrate',
-        type: 'number',
-        minLength: 1,
-        maxLength: 50
-    },
-    {
-        title: 'BillingRate',
-        key: 'billingrate',
-        type: 'number',
-        minLength: 1,
-        maxLength: 50
-    },
-    {
-        title: 'PartnerCommissionAmount',
-        key: 'billingamount',
-        type: 'number',
-        minLength: 1,
-        maxLength: 1000
-    },
-    {
-        title: 'ActivationDaysDate',
-        key: 'cleared',
-        type: 'Date'
-    },
-    {
-        title: 'ProcessDateCreated',
-        key: 'createdat',
-        type: 'Date'
-    },
-    {
-        title: 'ProcessDateUpdated',
-        key: 'updatedat',
-        type: 'Date'
-    },
-    {
-        title: 'Version',
-        key: 'version',
+        title: 'LocationName',
+        key: 'locationname',
         type: 'string',
-        defaultValue: '1.0'
+        defaultValue: 'Location name'
     },
     {
-        title: 'BankAccountUID',
-        key: 'bankaccountid',
+        title: 'LocationAddress',
+        key: 'locationaddress',
         type: 'string',
-        defaultValue: '03bcb3cd-b49a-4963-a71d-4dfa39d246b0'
+        defaultValue: 'Location address'
+    },
+    {
+        title: 'LocationCountry',
+        key: 'locationcountry',
+        type: 'string',
+        defaultValue: 'Location country'
     },
     {
         title: 'MCC',
         key: 'mcc',
         type: 'string',
+        defaultValue: 'MCC Value'
+    },
+    {
+        title: 'CardholderPresentData',
+        key: 'cardholderpresentdata',
+        type: 'string',
+        defaultValue: 'CardholderPresentData Value'
+    },
+    {
+        title: 'TranDate',
+        key: 'trandate',
+        type: 'Date'
+    },
+    {
+        title: 'TranCurrencyCode',
+        key: 'trancurrencycode',
+        type: 'string',
+        defaultValue: 'TranCurrencyCode Value'
+    },
+    {
+        title: 'TranCurrencyAmt',
+        key: 'trancurrencyamt',
+        type: 'string',
         minLength: 1,
-        maxLength: 200
+        maxLength: 10000
     },
     {
-        title: 'OIN',
-        key: 'oin',
+        title: 'RecnCurrencyCode',
+        key: 'recncurrencycode',
         type: 'string',
-        defaultValue: 'OIN Value'
+        defaultValue: 'RecnCurrencyCode Value'
     },
     {
-        title: 'SourceUID',
-        key: 'customerexternalid',
+        title: 'RecnCurrencyAmt',
+        key: 'recncurrencyamt',
         type: 'string',
-        defaultValue: 'fc319dfc-224f-4767-8314-caa6bb79f701'
+        minLength: 1,
+        maxLength: 10000
+    },
+    {
+        title: 'PWCBAmt',
+        key: 'pwcbamt',
+        type: 'string',
+        minLength: 1,
+        maxLength: 10000
+    },
+    {
+        title: 'PostFPInd',
+        key: 'postfpind',
+        type: 'string',
+        defaultValue: 'PostFPInd Value'
+    },
+    {
+        title: 'Amount',
+        key: 'amount',
+        type: 'string',
+        minLength: 1,
+        maxLength: 10000
     },
     {
         title: 'CardInputMode',
         key: 'cardinputmode',
         type: 'string',
-        defaultValue: 'Input mode value'
-    },
-    {
-        title: 'MatcherRunId',
-        key: 'matcherrunid',
-        type: 'string',
-        defaultValue: 'matcherid value'
+        defaultValue: 'CardInputMode Value'
     }
 ];
 

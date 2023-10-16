@@ -49,20 +49,27 @@ for (let type of fileTypesToGenerate) {
         printProgress("Finished writing chunk " + (index + 1) + " of " + chunkCount);
     });
 
+    const outputDirectory = path.resolve(__dirname, `outputs`);
+
+    if (!fs.existsSync(outputDirectory)){
+        fs.mkdirSync(outputDirectory);
+    }
+
     const fileDirectory = path.resolve(__dirname, `outputs/${type}`);
 
     if (!fs.existsSync(fileDirectory)){
         fs.mkdirSync(fileDirectory);
     }
 
-    const exportPath = `${fileDirectory}/${type}_${rowCount}_rows_${new Date().toISOString()}.csv`;
+    const filename = `${type}_${rowCount}_rows_${new Date().toISOString()}.csv`;
+    const exportPath = `${fileDirectory}/${filename}`;
 
     printProgress(`Writing to ${exportPath}...`);
         workbook.csv.writeFile(exportPath).then(() => {
     }).catch((err) => {
-        console.error('Error writing file.');
+        console.error(`Error writing file: ${filename}`);
         console.error(err);
     }).finally(() => {
-        printProgress('Finished.', true);
+        printProgress(`Finished writing file: ${filename}`, true);
     });   
 }

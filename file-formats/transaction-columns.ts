@@ -19,7 +19,7 @@ const columns: ColumnFormat[] = [
     {
         title: 'PrivatePan',
         key: 'PrivatePan',
-        type: 'string',
+        type: 'number',
         maxLength: 16,
         protect: true
     },
@@ -115,7 +115,7 @@ const columns: ColumnFormat[] = [
     {
         title: 'TranCurrencyAmt',
         key: 'TranCurrencyAmt',
-        type: 'string',
+        type: 'number',
         minLength: 1,
         maxLength: 10000
     },
@@ -128,14 +128,14 @@ const columns: ColumnFormat[] = [
     {
         title: 'RecnCurrencyAmt',
         key: 'RecnCurrencyAmt',
-        type: 'string',
+        type: 'number',
         minLength: 1,
         maxLength: 10000
     },
     {
         title: 'PWCBAmt',
         key: 'PWCBAmt',
-        type: 'string',
+        type: 'number',
         minLength: 1,
         maxLength: 10000
     },
@@ -148,7 +148,7 @@ const columns: ColumnFormat[] = [
     {
         title: 'Amount',
         key: 'Amount',
-        type: 'string',
+        type: 'number',
         minLength: 1,
         maxLength: 10000
     },

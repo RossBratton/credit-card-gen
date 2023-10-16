@@ -17,14 +17,14 @@ const columns: ColumnFormat[] = [
     {
         title: 'SortCode',
         key: 'SortCode',
-        type: 'string',
+        type: 'number',
         maxLength: 6,
         protect: true
     },
     {
         title: 'AccountNo',
         key: 'AccountNo',
-        type: 'string',
+        type: 'number',
         maxLength: 8,
         protect: true
     },

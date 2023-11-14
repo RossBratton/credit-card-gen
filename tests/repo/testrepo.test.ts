@@ -27,6 +27,7 @@ describe("TestRepo", () => {
         const testRepo = new TestRepo(logger);
 
         // Act
+        testRepo.create(testName);
         testRepo.update(testName, newName);
 
         // Asset

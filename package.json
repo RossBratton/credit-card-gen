@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_OPTIONS='--max-old-space-size=8192' ts-node index.ts",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "author": "",
   "license": "ISC",

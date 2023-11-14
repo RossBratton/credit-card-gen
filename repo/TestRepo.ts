@@ -13,4 +13,10 @@ export class TestRepo {
         this._dataStore.push(name);
         this._logger.log(`Created ${name}`);
     }
+
+    update(name: string, newName: string) {
+        const index = this._dataStore.indexOf(name);
+        this._dataStore[index] = newName;
+        this._logger.log(`Updated ${name} to ${newName}`);
+    }
 }

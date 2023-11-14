@@ -1,12 +1,12 @@
-import { Logger, dummyLogger } from "ts-log";
 import { TestRepo } from "../repo/TestRepo";
+import { Logger } from "../utils/logger";
 
 export class TestService {
     _logger: Logger;
     _repo: TestRepo;
 
-    constructor(testRepo: TestRepo) {
-        this._logger = dummyLogger;
+    constructor(testRepo: TestRepo, logger: Logger) {
+        this._logger = logger;
         this._repo = testRepo;
     }
 
